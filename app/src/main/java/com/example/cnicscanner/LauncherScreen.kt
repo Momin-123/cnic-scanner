@@ -4,8 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -48,7 +48,7 @@ fun LauncherScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Default.CameraAlt,
+                    imageVector = Icons.Default.Home,
                     contentDescription = "CNIC Scanner",
                     modifier = Modifier.size(60.dp),
                     tint = MaterialTheme.colorScheme.primary
@@ -91,7 +91,7 @@ fun LauncherScreen(
                 modifier = Modifier.padding(20.dp)
             ) {
                 FeatureItem(
-                    icon = Icons.Default.CameraAlt,
+                    icon = Icons.Default.Home,
                     title = "Auto Detection",
                     description = "Automatically detects CNIC in camera view"
                 )
@@ -99,7 +99,7 @@ fun LauncherScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 FeatureItem(
-                    icon = Icons.Default.Description,
+                    icon = Icons.Default.Edit,
                     title = "Smart Cropping",
                     description = "Intelligently crops and enhances CNIC images"
                 )
@@ -129,7 +129,7 @@ fun LauncherScreen(
             )
         ) {
             Icon(
-                imageVector = Icons.Default.CameraAlt,
+                imageVector = Icons.Default.Home,
                 contentDescription = null,
                 modifier = Modifier.padding(end = 8.dp)
             )

@@ -72,6 +72,9 @@ dependencies {
     // Image loading
     implementation("io.coil-kt:coil-compose:2.4.0")
     
+    // Math utilities for image processing
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

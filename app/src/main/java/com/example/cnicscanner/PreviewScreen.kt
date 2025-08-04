@@ -142,7 +142,7 @@ fun PreviewScreen(
                     )
                 } else {
                     Icon(
-                        imageVector = if (isSaved) Icons.Default.Check else Icons.Default.Save,
+                        imageVector = if (isSaved) Icons.Default.Check else Icons.Default.Star,
                         contentDescription = null,
                         modifier = Modifier.padding(end = 8.dp)
                     )

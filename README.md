@@ -1,171 +1,111 @@
 # CNIC Scanner App
 
-A smart Android application for scanning and processing Computerized National Identity Cards (CNIC) with automatic detection, cropping, and enhancement features.
+A comprehensive Android application for scanning and processing Pakistani Computerized National Identity Cards (CNIC) in both English and Urdu.
 
 ## Features
 
-### 🎯 **Automatic CNIC Detection**
-- Real-time camera preview with CNIC boundary detection
-- ML Kit-powered text recognition for accurate CNIC identification
-- Automatic capture when CNIC is properly positioned
-- Visual feedback with confidence percentage
+### Enhanced CNIC Detection
+- **Bigger Detection Box**: Increased detection area from 80% to 90% of screen width for better CNIC positioning
+- **Multi-language Support**: Detects CNICs in both English and Urdu languages
+- **Improved Accuracy**: Enhanced detection algorithm with better edge detection, corner recognition, and document feature analysis
+- **Auto-capture**: Automatically captures images when CNIC is detected with high confidence (>75%)
 
-### 📷 **Smart Camera Interface**
-- Full-screen camera preview
-- CNIC-sized rectangle overlay with corner indicators
-- Real-time detection status and instructions
-- Manual capture button for user control
+### Dual-Side Scanning
+- **Front and Back Side Support**: Automatically switches between front and back side scanning
+- **Progress Tracking**: Visual indicators show which sides have been captured
+- **Side Indicators**: Clear labeling of current side being scanned
 
-### ✂️ **Intelligent Image Processing**
-- Automatic cropping to CNIC boundaries
-- Image enhancement for better readability
-- Proper aspect ratio maintenance (1.6:1 for CNIC)
-- High-quality JPEG output
+### Background Removal
+- **Automatic Background Removal**: Removes background from captured CNIC images
+- **Edge-based Detection**: Samples edge colors to determine background
+- **Transparency Support**: Creates transparent backgrounds for clean CNIC extraction
 
-### 💾 **Gallery Integration**
-- Automatic saving to device gallery
-- Organized storage in "CNICScanner" folder
-- Compatible with Android 10+ MediaStore API
-- File provider support for sharing
+### Image Enhancement
+- **Contrast Enhancement**: Improves text readability
+- **Saturation Adjustment**: Enhances color clarity
+- **Quality Optimization**: High-quality image capture and processing
 
-### 📱 **User-Friendly Interface**
-- Beautiful launcher screen with app introduction
-- Intuitive navigation between camera and preview
-- Preview screen with save, share, and retake options
-- Material Design 3 components
+### User Interface Improvements
+- **Visual Feedback**: Color-coded detection box (Green = detected, Yellow = detected with lower confidence, White = not detected)
+- **Real-time Instructions**: Dynamic text showing current status and instructions
+- **Progress Indicators**: Shows completion status for front and back sides
+- **Manual Fallback**: Manual capture button for cases where auto-capture doesn't trigger
 
-## Technical Implementation
+## Technical Improvements
 
-### **Camera Integration**
-- Uses CameraX API for modern camera functionality
-- ImageAnalysis for real-time CNIC detection
-- PreviewView for smooth camera preview
-- Proper lifecycle management
+### Detection Algorithm
+- **Enhanced Edge Detection**: Improved gradient-based edge detection
+- **Corner Recognition**: Detects strong edges at corners for better rectangular shape validation
+- **Document Feature Analysis**: Identifies structured content typical in official documents
+- **Text Density Analysis**: Detects text-like patterns for document validation
 
-### **ML Kit Integration**
-- Text recognition for CNIC content detection
-- Pattern matching for CNIC numbers and text
-- Confidence scoring for detection accuracy
-- Fallback to basic edge detection
+### Image Processing
+- **Background Removal Algorithm**: 
+  - Samples edge colors to determine background
+  - Calculates color distance for pixel classification
+  - Creates transparent backgrounds for clean extraction
+- **Enhanced Cropping**: Improved CNIC boundary detection with safety bounds
+- **Quality Enhancement**: Multiple color matrix operations for optimal image quality
 
-### **Image Processing**
-- YUV to RGB conversion for ML Kit compatibility
-- Bitmap manipulation for cropping and enhancement
-- Color matrix adjustments for better contrast
-- Efficient memory management
+### Error Handling
+- **Robust Error Handling**: Comprehensive try-catch blocks for all operations
+- **Fallback Mechanisms**: Multiple detection methods ensure reliability
+- **Safe Bounds Checking**: Prevents array out-of-bounds errors
 
-### **Storage & Sharing**
-- MediaStore API for modern Android versions
-- FileProvider for secure file sharing
-- Proper permission handling
-- Gallery integration
+## Usage
 
-## Permissions Required
+1. **Launch the App**: Open the CNIC Scanner app
+2. **Position CNIC**: Place the CNIC within the detection frame
+3. **Auto-capture**: The app will automatically capture when CNIC is detected
+4. **Switch Sides**: After capturing front side, position the back side
+5. **Manual Capture**: Use manual capture button if needed
+6. **View Results**: Processed images are saved to gallery with background removed
 
-- **Camera**: For capturing CNIC images
-- **Storage**: For saving processed images to gallery
-- **Read Media Images**: For accessing saved images (Android 13+)
+## Requirements
 
-## Usage Instructions
+- Android 6.0 (API level 24) or higher
+- Camera permission
+- Storage permission for saving images
 
-1. **Launch the App**: Open CNIC Scanner from your app drawer
-2. **Start Scanning**: Tap "Start Scanning" on the launcher screen
-3. **Position CNIC**: Hold your CNIC within the rectangular frame
-4. **Auto Capture**: The app will automatically capture when CNIC is detected
-5. **Manual Capture**: Alternatively, tap "Capture CNIC" button
-6. **Preview & Save**: Review the captured image and save to gallery
-7. **Share**: Share the processed CNIC image with others
+## Dependencies
 
-## Development Setup
+- AndroidX Camera libraries
+- Compose UI framework
+- Kotlin standard library
+- AndroidX ExifInterface for image metadata
 
-### Prerequisites
-- Android Studio Arctic Fox or later
-- Android SDK 24+ (API level 24)
-- Kotlin 1.8+
-- Compose BOM
+## Installation
 
-### Dependencies
-```kotlin
-// Camera
-implementation("androidx.camera:camera-core:1.3.1")
-implementation("androidx.camera:camera-camera2:1.3.1")
-implementation("androidx.camera:camera-lifecycle:1.3.1")
-implementation("androidx.camera:camera-view:1.3.1")
+1. Clone the repository
+2. Open in Android Studio
+3. Build and run on device or emulator
+4. Grant necessary permissions when prompted
 
-// ML Kit
-implementation("com.google.mlkit:text-recognition:16.0.0")
-implementation("com.google.mlkit:object-detection:17.0.0")
+## Technical Details
 
-// Image Processing
-implementation("androidx.exifinterface:exifinterface:1.3.6")
-implementation("io.coil-kt:coil-compose:2.5.0")
+### Detection Confidence Levels
+- **High Confidence (>75%)**: Auto-capture enabled, green detection box
+- **Medium Confidence (50-75%)**: Yellow detection box, manual capture recommended
+- **Low Confidence (<50%)**: White detection box, manual positioning needed
 
-// Permissions
-implementation("com.google.accompanist:accompanist-permissions:0.32.0")
-```
+### Supported CNIC Features
+- **English Text**: "CNIC", "NIC", "Identity Card", "Pakistan", "NADRA", etc.
+- **Urdu Text**: "قومی شناختی کارڈ", "شناختی کارڈ", "پاکستان", etc.
+- **CNIC Numbers**: 13-digit format with dashes (XXXXX-XXXXXXX-X)
+- **Document Structure**: Rectangular shape with proper aspect ratio (1.6:1)
 
-### Build Configuration
-```kotlin
-android {
-    compileSdk = 35
-    minSdk = 24
-    targetSdk = 35
-    
-    buildFeatures {
-        compose = true
-    }
-}
-```
-
-## Architecture
-
-The app follows a modular architecture with clear separation of concerns:
-
-- **UI Layer**: Compose screens and components
-- **Camera Layer**: CameraX integration and image analysis
-- **ML Layer**: ML Kit text recognition and CNIC detection
-- **Processing Layer**: Image cropping and enhancement
-- **Storage Layer**: Gallery saving and file management
-
-## Key Components
-
-### `CameraScreen.kt`
-- Main camera interface with preview and detection
-- Real-time CNIC detection using ML Kit
-- Auto-capture functionality
-
-### `CNICDetector.kt`
-- ML Kit integration for text recognition
-- CNIC pattern matching and confidence scoring
-- Fallback detection mechanisms
-
-### `ImageProcessor.kt`
-- Image cropping and enhancement
-- Gallery saving with MediaStore API
-- File provider configuration
-
-### `PreviewScreen.kt`
-- Captured image preview
-- Save, share, and retake functionality
-- User feedback and status display
+### Image Processing Pipeline
+1. **Capture**: High-quality image capture
+2. **Detect**: Enhanced CNIC detection
+3. **Crop**: Intelligent boundary detection
+4. **Remove Background**: Edge-based background removal
+5. **Enhance**: Contrast and saturation optimization
+6. **Save**: High-quality output to gallery
 
 ## Future Enhancements
 
-- [ ] OCR text extraction from CNIC
-- [ ] Multiple document type support
-- [ ] Cloud storage integration
-- [ ] Batch processing capabilities
-- [ ] Advanced image filters
-- [ ] Document verification features
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-For support and questions, please open an issue on the GitHub repository. 
+- ML Kit integration for advanced text recognition
+- OCR for extracting CNIC data
+- Cloud storage integration
+- Multiple document type support
+- Advanced image filters and effects 
